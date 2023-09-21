@@ -44,8 +44,8 @@ public class Contact {
 
 
         }
+        return _contactes;
     }
-
 
     @DrawableRes
     private int imatge;
