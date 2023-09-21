@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtNewPhone;
     private ImageButton imbAdd;
 */
+    int indexContacte = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,19 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        mostrarContacte(Contact.getContactes().get(1));
+        mostrarContacte(indexContacte);
+
+        // Programar els botons
+        binding.btnForward.setOnClickListener(view1 -> {
+            indexContacte  =(indexContacte+1)%Contact.getContactes().size();
+            mostrarContacte(indexContacte);
+        });
+
 
     }
 
-    private void mostrarContacte(Contact c) {
+    private void mostrarContacte(int index) {
+        Contact c = Contact.getContactes().get(index);
         binding.llyFitxaDades.imvPhoto.setImageResource(c.getImatge());
         binding.llyFitxaDades.edtName.setText(c.getNom());
         binding.llyFitxaDades.edtEmail.setText(c.getEmail());
