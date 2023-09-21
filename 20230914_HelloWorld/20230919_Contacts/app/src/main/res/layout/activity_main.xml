@@ -24,10 +24,10 @@
             android:src="@drawable/landscape" />
 
 
-        <include layout="@layout/fitxa_dades"></include>
+        <include android:id="@+id/llyFitxaDades" layout="@layout/fitxa_dades"></include>
 
 
-        <include layout="@layout/editor_telefons"></include>
+        <include  android:id="@+id/llyEditorTelefons"  layout="@layout/editor_telefons"></include>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView

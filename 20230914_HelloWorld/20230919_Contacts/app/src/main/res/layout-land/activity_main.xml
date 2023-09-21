@@ -27,12 +27,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-            <include layout="@layout/fitxa_dades"
+            <include
+                android:id="@+id/llyFitxaDades"
+                layout="@layout/fitxa_dades"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 ></include>
             <include
+                android:id="@+id/llyEditorTelefons"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

@@ -6,6 +6,11 @@ android {
     namespace 'org.milaifontanals.appcontact'
     compileSdk 33
 
+    // Activar el View Binding per no haver de fer el findViewById()
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "org.milaifontanals.appcontact"
         minSdk 26
