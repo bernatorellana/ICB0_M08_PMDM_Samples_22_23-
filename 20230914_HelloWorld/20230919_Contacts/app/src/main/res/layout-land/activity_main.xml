@@ -23,11 +23,21 @@
             android:scaleType="centerCrop"
             android:src="@drawable/landscape" />
 
-
-        <include layout="@layout/fitxa_dades"></include>
-
-
-        <include layout="@layout/editor_telefons"></include>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <include layout="@layout/fitxa_dades"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                ></include>
+            <include
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/editor_telefons"></include>
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
