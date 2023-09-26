@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
@@ -22,13 +23,31 @@ android:padding="20dp">
     android:orientation="vertical"
     android:padding="15dp">
 
-    <EditText
-        android:id="@+id/edtName"
+<!--    <EditText-->
+<!--        android:id="@+id/edtName"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:hint="Name"-->
+<!--        android:text="The Witcher" />-->
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtNameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="Name"
-        android:text="The Witcher" />
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:hint="Enter your name" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Spinner
         android:id="@+id/spnSex"

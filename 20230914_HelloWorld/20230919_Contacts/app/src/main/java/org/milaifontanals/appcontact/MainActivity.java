@@ -57,14 +57,34 @@ public class MainActivity extends AppCompatActivity {
         binding.llyFitxaDades.edtName.addTextChangedListener(new TextChangedListener() {
             @Override
             public void afterTextChanged(Editable editable) {
+                validaNom();
                 Log.d(TAG, "estic passant pel textChanged"+binding.llyFitxaDades.edtName.getText());
                 Contact actual = Contact.getContactes().get(indexContacte);
                 actual.setNom(binding.llyFitxaDades.edtName.getText().toString());
             }
         });
 
+
+        binding.llyFitxaDades.edtEmail.addTextChangedListener(new TextChangedListener() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Contact actual = Contact.getContactes().get(indexContacte);
+                actual.setEmail(binding.llyFitxaDades.edtEmail.getText().toString());
+            }
+        });
+
+
         //*************************************************************
 
+    }
+
+    private void validaNom() {
+
+        if(binding.llyFitxaDades.edtName.getText().toString().trim().length()<3){
+            binding.llyFitxaDades.edtName.setError("Nom erroni");
+        } else {
+            binding.llyFitxaDades.edtName.setError(null);
+        }
     }
 
     private void mostrarContacte(int index) {
