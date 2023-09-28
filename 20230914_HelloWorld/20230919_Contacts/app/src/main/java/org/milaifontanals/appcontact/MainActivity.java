@@ -7,16 +7,23 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SpinnerAdapter;
 
 import org.milaifontanals.appcontact.databinding.ActivityMainBinding;
 import org.milaifontanals.appcontact.model.Contact;
+import org.milaifontanals.appcontact.model.Sexe;
 import org.milaifontanals.appcontact.utils.TextChangedListener;
+
+import java.lang.reflect.Array;
 
 public class MainActivity extends AppCompatActivity {
 
 
+    private ArrayAdapter<String> adapterContactes;
     private static final String TAG = "AGENDA_CONTACTES";
     private ActivityMainBinding binding;
 /*
@@ -36,6 +43,24 @@ public class MainActivity extends AppCompatActivity {
         //******************************************************************
         // Programació d'events
         //******************************************************************
+        programarEvents();
+
+        OmplirSpinnerSexe();
+
+        //*************************************************************
+
+    }
+
+    private void OmplirSpinnerSexe() {
+
+        SpinnerAdapter adapter =
+            new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item,
+                Sexe.values());// retorna tots els valors de l'enumeració
+        binding.llyFitxaDades.spnSex.setAdapter(adapter);
+    }
+
+    private void programarEvents() {
         // Programar els botons
         binding.btnForward.setOnClickListener( c -> {
             // Codi que s'executa quan fas click sobre el botó forward
@@ -72,10 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 actual.setEmail(binding.llyFitxaDades.edtEmail.getText().toString());
             }
         });
-
-
-        //*************************************************************
-
     }
 
     private void validaNom() {
@@ -93,10 +114,17 @@ public class MainActivity extends AppCompatActivity {
         binding.llyFitxaDades.edtName.setText(c.getNom());
         binding.llyFitxaDades.edtEmail.setText(c.getEmail());
 
+        binding.llyFitxaDades.spnSex.setSelection(c.getSexe().ordinal());
+
         binding.btnBack.setEnabled(index>0);
         binding.btnBack.setAlpha(binding.btnBack.isEnabled()?1: 0.25f);
         binding.btnForward.setEnabled(index<Contact.getContactes().size()-1);
         binding.btnForward.setAlpha(binding.btnForward.isEnabled()?1: 0.25f);
+
+        // Gestió de la llista de telèfons
+        adapterContactes = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+                                                c.getTelefons());
+        binding.llyEditorTelefons.lsvPhones.setAdapter(adapterContactes);
 
     }
 }

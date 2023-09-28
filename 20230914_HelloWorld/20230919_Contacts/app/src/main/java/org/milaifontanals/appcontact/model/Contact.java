@@ -20,6 +20,8 @@ public class Contact {
                     Sexe.HOME,
                     "thewitcher@greetingsfromhell.com",
                     "+34 6236363");
+            c1.getTelefons().add("654123234");
+            c1.getTelefons().add("674372382");
             _contactes.add(c1);
             Contact c2 = new Contact(R.drawable.yennefer, "Yenneffer",
                     Sexe.DONA,
@@ -31,6 +33,7 @@ public class Contact {
                     "ciri@greetingsfromhell.com",
                     "+34 543654654");
             _contactes.add(c3);
+            c3.getTelefons().add("654562323");
             Contact c4 = new Contact(R.drawable.dijkstra, "Dijkstra",
                     Sexe.HOME,
                     "dijkstra@greetingsfromhell.com",
