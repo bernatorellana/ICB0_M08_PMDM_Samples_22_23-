@@ -97,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 actual.setEmail(binding.llyFitxaDades.edtEmail.getText().toString());
             }
         });
+        binding.llyEditorTelefons.imbAdd.setOnClickListener(view -> {
+            Contact actual = Contact.getContactes().get(indexContacte);
+            actual.getTelefons().add("XXXXXXX");
+            adapterContactes.notifyDataSetChanged();
+        });
     }
 
     private void validaNom() {
