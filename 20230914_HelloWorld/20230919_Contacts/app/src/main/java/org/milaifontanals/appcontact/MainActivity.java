@@ -30,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapterContactes;
     private static final String TAG = "AGENDA_CONTACTES";
     private ActivityMainBinding binding;
+
+
+
 /*
     private EditText edtNewPhone;
     private ImageButton imbAdd;
 */
-    int indexContacte = 0;
+    private int indexContacte = 0;
+    private int telefonIdSelected = -1; // -1 indica cap seleccionat
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,21 +107,32 @@ public class MainActivity extends AppCompatActivity {
         });
         binding.llyEditorTelefons.imbAdd.setOnClickListener(view -> {
             Contact actual = Contact.getContactes().get(indexContacte);
-            actual.getTelefons().add("XXXXXXX");
+            String nouTelefon = binding.llyEditorTelefons.edtNewPhone.getText().toString();
+            boolean repetit = actual.getTelefons().contains(nouTelefon);
+            if(!repetit) actual.getTelefons().add(nouTelefon);
             adapterContactes.notifyDataSetChanged();
             Log.d(TAG,"getSelectedItemPosition>"+ binding.llyEditorTelefons.lsvPhones.getSelectedItemPosition());
         });
-        binding.llyEditorTelefons.lsvPhones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+        binding.llyEditorTelefons.imbDel.setOnClickListener(view -> {
+            if(this.telefonIdSelected!=-1) {
+                Contact actual = Contact.getContactes().get(indexContacte);
+                // només eliminem la selecció quan esborrem l'últim telèfon
+                boolean eliminarSeleccio = (actual.getTelefons().size()-1==this.telefonIdSelected);
+                actual.getTelefons().remove(this.telefonIdSelected);
+                adapterContactes.notifyDataSetChanged();
+                if(eliminarSeleccio){
+                    telefonIdSelected = -1;
+                }
             }
         });
+
+        binding.llyEditorTelefons.lsvPhones.setOnItemClickListener(
+                (adapterView, view, position, id) -> {
+                    telefonIdSelected = position;
+        });
+
+
     }
 
     private void validaNom() {
@@ -130,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mostrarContacte(int index) {
+        telefonIdSelected = -1;
         Contact c = Contact.getContactes().get(index);
         binding.llyFitxaDades.imvPhoto.setImageResource(c.getImatge());
         binding.llyFitxaDades.edtName.setText(c.getNom());
@@ -149,6 +165,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Garantim que es es vegi la selecció.
         binding.llyEditorTelefons.lsvPhones.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        binding.llyEditorTelefons.lsvPhones.setSelector(android.R.color.darker_gray);
+        binding.llyEditorTelefons.lsvPhones.setSelector(R.color.dark_grey);
     }
 }
