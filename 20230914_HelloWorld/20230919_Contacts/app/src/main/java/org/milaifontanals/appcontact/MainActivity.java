@@ -3,14 +3,18 @@ package org.milaifontanals.appcontact;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 
 import org.milaifontanals.appcontact.databinding.ActivityMainBinding;
@@ -101,6 +105,18 @@ public class MainActivity extends AppCompatActivity {
             Contact actual = Contact.getContactes().get(indexContacte);
             actual.getTelefons().add("XXXXXXX");
             adapterContactes.notifyDataSetChanged();
+            Log.d(TAG,"getSelectedItemPosition>"+ binding.llyEditorTelefons.lsvPhones.getSelectedItemPosition());
+        });
+        binding.llyEditorTelefons.lsvPhones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
     }
 
@@ -131,5 +147,8 @@ public class MainActivity extends AppCompatActivity {
                                                 c.getTelefons());
         binding.llyEditorTelefons.lsvPhones.setAdapter(adapterContactes);
 
+        // Garantim que es es vegi la selecció.
+        binding.llyEditorTelefons.lsvPhones.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        binding.llyEditorTelefons.lsvPhones.setSelector(android.R.color.darker_gray);
     }
 }
