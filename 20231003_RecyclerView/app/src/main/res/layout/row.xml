@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="30dp">
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    >
+    <ImageView
+        android:src="@drawable/prince"
+        android:id="@+id/imvPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ImageView>
     <TextView
         android:id="@+id/txvName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:text="Prince"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Don't let the little pony fool you. Once the Prince gets a running start, you WILL be trampled. Deals double damage once he gets charging. ">
+
+    </TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package org.milaifontanals.recyclerviewapp.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull CardsAdapter.ViewHolder rowHolder, int position) {
         Card cartaActual = mCards.get(position);
         rowHolder.txvName.setText(cartaActual.getName());
+        rowHolder.imvPhoto.setImageResource(cartaActual.getDrawable());
     }
 
     @Override
@@ -45,9 +47,11 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txvName;
+        ImageView imvPhoto;
         public ViewHolder(@NonNull View row) {
             super(row);
             txvName = row.findViewById(R.id.txvName);
+            imvPhoto = row.findViewById(R.id.imvPhoto);
         }
     }
 }
