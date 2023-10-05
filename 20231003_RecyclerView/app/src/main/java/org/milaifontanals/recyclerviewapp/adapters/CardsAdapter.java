@@ -34,6 +34,8 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull CardsAdapter.ViewHolder rowHolder, int position) {
         Card cartaActual = mCards.get(position);
         rowHolder.txvName.setText(cartaActual.getName());
+        rowHolder.txvDesc.setText(cartaActual.getDesc());
+        rowHolder.txvCost.setText(""+cartaActual.getElixirCost());
         rowHolder.imvPhoto.setImageResource(cartaActual.getDrawable());
     }
 
@@ -47,10 +49,14 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txvName;
+        TextView txvDesc;
+        TextView txvCost;
         ImageView imvPhoto;
         public ViewHolder(@NonNull View row) {
             super(row);
             txvName = row.findViewById(R.id.txvName);
+            txvDesc = row.findViewById(R.id.txvDesc);
+            txvCost = row.findViewById(R.id.txvCost);
             imvPhoto = row.findViewById(R.id.imvPhoto);
         }
     }
