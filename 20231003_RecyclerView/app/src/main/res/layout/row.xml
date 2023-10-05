@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="20dp"
+    android:backgroundTintMode="multiply"
     android:id="@+id/clyRow">
 
     <ImageView
@@ -20,6 +21,7 @@
     <TextView
         android:id="@+id/txvName"
         android:layout_width="0dp"
+
         android:layout_height="wrap_content"
         android:text="Prince"
         app:layout_constraintEnd_toEndOf="@id/txvDesc"
