@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="RARITY_COMMON">#9A9A9A</color>
+    <color name="RARITY_RARE">#ffa31a</color>
+    <color name="RARITY_EPIC">#B1B1E0</color>
 </resources>

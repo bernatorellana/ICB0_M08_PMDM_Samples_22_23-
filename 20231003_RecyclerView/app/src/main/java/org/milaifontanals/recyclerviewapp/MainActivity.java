@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         );
         rcyCards.setHasFixedSize(true); // només en el cas que les files tinguin la mateixa alçada
         // 2.- Crear l'adapter
-        adapter = new CardsAdapter(Card.getCartes());
+        adapter = new CardsAdapter(this, Card.getCartes());
 
         // 3.- Connectar l'adapter al Recycler View
         rcyCards.setAdapter(adapter);

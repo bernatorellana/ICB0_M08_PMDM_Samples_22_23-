@@ -9,7 +9,8 @@ import java.util.List;
 public enum Rarity {
     COMMON,
     RARE,
-    EPIC;    
+    EPIC;
+
     public static List<Rarity> getLlista(){
         return Arrays.asList(Rarity.values());
     }

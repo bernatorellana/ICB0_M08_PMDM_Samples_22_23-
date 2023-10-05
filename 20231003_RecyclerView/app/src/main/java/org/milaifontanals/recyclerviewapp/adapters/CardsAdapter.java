@@ -1,5 +1,8 @@
 package org.milaifontanals.recyclerviewapp.adapters;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.milaifontanals.recyclerviewapp.Card;
@@ -17,8 +21,10 @@ import java.util.List;
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
 
     private List<Card> mCards;
+    private Context mContext;
 
-    public CardsAdapter(List<Card> cards){
+    public CardsAdapter(Context c, List<Card> cards){
+        mContext = c;
         mCards = cards;
     }
 
@@ -37,6 +43,22 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
         rowHolder.txvDesc.setText(cartaActual.getDesc());
         rowHolder.txvCost.setText(""+cartaActual.getElixirCost());
         rowHolder.imvPhoto.setImageResource(cartaActual.getDrawable());
+        int color;
+        switch (cartaActual.getRarity()){
+            case EPIC: color =  mContext.getColor(R.color.RARITY_EPIC);break;
+            case COMMON: color = mContext.getColor(R.color.RARITY_COMMON);break;
+            case RARE: color = mContext.getColor(R.color.RARITY_RARE);break;
+            default:color = mContext.getColor(R.color.RARITY_COMMON);
+        }
+        int Colors;
+        rowHolder.clyRow.setBackground(
+            new GradientDrawable(
+                    GradientDrawable.Orientation.BOTTOM_TOP,
+                    new int[]{
+                        Color.parseColor("#ffffff"), // color inici
+                        color // color fi
+        }));
+        //rowHolder.clyRow.setBackgroundColor(color);
     }
 
     @Override
@@ -52,12 +74,14 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
         TextView txvDesc;
         TextView txvCost;
         ImageView imvPhoto;
+        ConstraintLayout clyRow;
         public ViewHolder(@NonNull View row) {
             super(row);
             txvName = row.findViewById(R.id.txvName);
             txvDesc = row.findViewById(R.id.txvDesc);
             txvCost = row.findViewById(R.id.txvCost);
             imvPhoto = row.findViewById(R.id.imvPhoto);
+            clyRow = row.findViewById(R.id.clyRow);
         }
     }
 }
