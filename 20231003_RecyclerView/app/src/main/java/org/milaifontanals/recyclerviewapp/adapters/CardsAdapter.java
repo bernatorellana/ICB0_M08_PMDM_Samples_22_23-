@@ -15,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.milaifontanals.recyclerviewapp.Card;
+import org.milaifontanals.recyclerviewapp.ICardSelectedListener;
+import org.milaifontanals.recyclerviewapp.MainActivity;
 import org.milaifontanals.recyclerviewapp.R;
 
 import java.util.List;
@@ -22,13 +24,19 @@ import java.util.List;
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
 
     private List<Card> mCards;
+    private ICardSelectedListener mListener;
     private Context mContext;
+
 
     private int idxElementSeleccionat = -1;
 
 
     public CardsAdapter(Context c, List<Card> cards){
         mContext = c;
+        if((c instanceof ICardSelectedListener)==false){
+            throw new RuntimeException("El context no és un ICardSelectedListener");
+        }
+        mListener = (ICardSelectedListener)c;
         mCards = cards;
     }
 
@@ -54,6 +62,8 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
             this.idxElementSeleccionat = rowHolder.getAdapterPosition();
             this.notifyItemChanged(idxElementSeleccionat);
             this.notifyItemChanged(posicioAnterior);
+            mListener.onCardSelected(mCards.get(this.idxElementSeleccionat));
+
         });
 
         int color;
@@ -111,6 +121,11 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
                 notifyItemChanged(idxElementSeleccionat);
             }
         }
+    }
+
+    public Card getCartaSeleccionada() {
+        if(idxElementSeleccionat!=-1) return mCards.get(idxElementSeleccionat);
+        return null;
     }
 
     /**

@@ -12,7 +12,9 @@ import android.view.MenuItem;
 
 import org.milaifontanals.recyclerviewapp.adapters.CardsAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends
+        AppCompatActivity
+        implements ICardSelectedListener {
 
     private CardsAdapter adapter;
 
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 3.- Connectar l'adapter al Recycler View
         rcyCards.setAdapter(adapter);
+
+
+
     }
 
     private void setupActionBar() {
@@ -50,11 +55,31 @@ public class MainActivity extends AppCompatActivity {
        //myToolbar.displa(false);
     }
 
+    private Menu menu;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        //menu.getItem(0).setEnabled(false);
+        this.menu = menu;
+
+        actualitzaMenu();
         return true;
+    }
+
+
+    @Override
+    public void onCardSelected(Card c){
+        actualitzaMenu();
+    }
+
+
+    private void actualitzaMenu(){
+        boolean opcionsMenuActivades = adapter.getCartaSeleccionada()!=null;
+        for(int i=0;i<menu.size();i++){
+            menu.getItem(i).setEnabled(opcionsMenuActivades);
+            menu.getItem(i).getIcon().setAlpha(
+                    opcionsMenuActivades?255:50
+            );
+        }
     }
 
 
