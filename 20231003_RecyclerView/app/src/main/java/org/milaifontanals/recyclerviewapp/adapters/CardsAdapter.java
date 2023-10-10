@@ -24,7 +24,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
     private List<Card> mCards;
     private Context mContext;
 
-    private int idxElementSeccionat = -1;
+    private int idxElementSeleccionat = -1;
 
 
     public CardsAdapter(Context c, List<Card> cards){
@@ -50,9 +50,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
 
 
         rowHolder.itemView.setOnClickListener(view -> {
-            int posicioAnterior = this.idxElementSeccionat;
-            this.idxElementSeccionat = rowHolder.getAdapterPosition();
-            this.notifyItemChanged(idxElementSeccionat);
+            int posicioAnterior = this.idxElementSeleccionat;
+            this.idxElementSeleccionat = rowHolder.getAdapterPosition();
+            this.notifyItemChanged(idxElementSeleccionat);
             this.notifyItemChanged(posicioAnterior);
         });
 
@@ -73,8 +73,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
                             color // color fi
                     }
         ));
-        if(position==idxElementSeccionat) {
-            rowHolder.clyRow.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff00")));
+        if(position== idxElementSeleccionat) {
+            rowHolder.clyRow.setBackgroundTintList(
+                    ColorStateList.valueOf(Color.parseColor("#ffff00")));
         } else {
             rowHolder.clyRow.setBackgroundTintList(null);
         }
@@ -83,6 +84,33 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return mCards.size();
+    }
+
+    public void deleteSelected() {
+        if(this.idxElementSeleccionat !=-1){
+            mCards.remove(idxElementSeleccionat);
+
+            notifyItemRemoved(idxElementSeleccionat);
+            if(idxElementSeleccionat >=mCards.size() || mCards.size()==0) {
+                idxElementSeleccionat = -1;
+            } else {
+                notifyItemChanged(idxElementSeleccionat);
+            }
+        }
+    }
+
+    public void move(int offset) {
+        if(idxElementSeleccionat !=-1) {
+            int nouIndex = idxElementSeleccionat + offset;
+            if (nouIndex >= 0 && nouIndex < mCards.size()) {
+                Card c = mCards.remove(idxElementSeleccionat);
+                mCards.add(nouIndex, c);
+                notifyItemRemoved(idxElementSeleccionat);
+                notifyItemInserted(nouIndex);
+                idxElementSeleccionat = nouIndex;
+                notifyItemChanged(idxElementSeleccionat);
+            }
+        }
     }
 
     /**
