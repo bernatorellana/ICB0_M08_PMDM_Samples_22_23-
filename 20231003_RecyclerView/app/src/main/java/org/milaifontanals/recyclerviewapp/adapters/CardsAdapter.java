@@ -26,6 +26,7 @@ import org.milaifontanals.recyclerviewapp.Card;
 import org.milaifontanals.recyclerviewapp.ICardSelectedListener;
 import org.milaifontanals.recyclerviewapp.MainActivity;
 import org.milaifontanals.recyclerviewapp.R;
+import org.milaifontanals.recyclerviewapp.Rarity;
 
 import java.util.List;
 
@@ -51,8 +52,14 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
     @NonNull
     @Override
     public CardsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        int layout = R.layout.row;
+        if(viewType==1)
+            layout = R.layout.row_epic;
+
         View row = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row, parent, false);
+                    .inflate(layout, parent, false);
+
         return new ViewHolder(row);
     }
 
@@ -106,6 +113,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
             default:color = mContext.getColor(R.color.RARITY_COMMON);
         }
         int Colors;
+        if(cartaActual.getRarity()!=Rarity.EPIC)
         rowHolder.clyRow.setBackground(
             new GradientDrawable(
                     GradientDrawable.Orientation.BOTTOM_TOP,
@@ -126,6 +134,12 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return mCards.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(mCards.get(position).getRarity()==Rarity.EPIC) return 1;
+        return 0;
     }
 
     public void deleteSelected() {
