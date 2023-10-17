@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.milaifontanals.recyclerviewapp.Card;
 import org.milaifontanals.recyclerviewapp.ICardSelectedListener;
 import org.milaifontanals.recyclerviewapp.MainActivity;
@@ -54,8 +56,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
         rowHolder.txvName.setText(cartaActual.getName());
         rowHolder.txvDesc.setText(cartaActual.getDesc());
         rowHolder.txvCost.setText(""+cartaActual.getElixirCost());
-        rowHolder.imvPhoto.setImageResource(cartaActual.getDrawable());
-
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.displayImage(cartaActual.getImageURL(),rowHolder.imvPhoto);
+        //rowHolder.imvPhoto.setImageResource(cartaActual.getImageURL());
 
         rowHolder.itemView.setOnClickListener(view -> {
             int posicioAnterior = this.idxElementSeleccionat;

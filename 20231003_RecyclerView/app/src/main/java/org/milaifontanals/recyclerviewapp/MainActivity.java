@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import org.milaifontanals.recyclerviewapp.adapters.CardsAdapter;
 
 public class MainActivity extends
@@ -24,6 +28,8 @@ public class MainActivity extends
         setContentView(R.layout.activity_main);
 
         setupActionBar();
+
+        setupUniversalImageLoader();
 
 
         // 0.- Busquem el RecyclerView
@@ -44,6 +50,21 @@ public class MainActivity extends
 
 
 
+    }
+
+    private void setupUniversalImageLoader() {
+        DisplayImageOptions dop = new DisplayImageOptions.Builder().
+                showImageOnLoading(R.drawable.loading)
+                .build();
+        // Create global configuration and initialize ImageLoader with this config
+        ImageLoaderConfiguration config =
+                new ImageLoaderConfiguration.Builder(this)
+                        //.threadPoolSize(10)
+                        //.diskCacheSize(1000)
+                        .defaultDisplayImageOptions(dop)
+                        .build();
+
+        ImageLoader.getInstance().init(config);
     }
 
     private void setupActionBar() {
