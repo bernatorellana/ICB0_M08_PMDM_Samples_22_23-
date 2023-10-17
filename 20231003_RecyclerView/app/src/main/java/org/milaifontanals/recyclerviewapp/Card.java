@@ -84,7 +84,7 @@ public class Card implements Parcelable
                     " Three unarmored ranged attackers. Who the heck taught these guys to throw spears!? Who thought that was a good idea?!   ",
                     2 ));
             _cartes.add(new Card(1, "Prince", Rarity.EPIC,
-                    "\"http://raw.githubusercontent.com/bernatorellana/ICB0_M08_PMDM_Samples_21_22/main/UF1/20220211_RecyclerView/app/src/main/res/drawable/prince.png\"",
+                    "http://raw.githubusercontent.com/bernatorellana/ICB0_M08_PMDM_Samples_21_22/main/UF1/20220211_RecyclerView/app/src/main/res/drawable/prince.png",
                     "Don't let the little pony fool you. Once the Prince gets a running start, you WILL be trampled. Deals double damage once he gets charging. ",
                     5 ));
             _cartes.add(new Card(2, "Skeleton Army", Rarity.RARE,

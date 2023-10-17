@@ -2,7 +2,9 @@ package org.milaifontanals.recyclerviewapp.adapters;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ViewScaleType;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.milaifontanals.recyclerviewapp.Card;
 import org.milaifontanals.recyclerviewapp.ICardSelectedListener;
@@ -56,8 +62,31 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder>{
         rowHolder.txvName.setText(cartaActual.getName());
         rowHolder.txvDesc.setText(cartaActual.getDesc());
         rowHolder.txvCost.setText(""+cartaActual.getElixirCost());
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(cartaActual.getImageURL(),rowHolder.imvPhoto);
+        if(cartaActual.getBitmap()!=null){
+            rowHolder.imvPhoto.setImageBitmap(cartaActual.getBitmap());
+        } else {
+            rowHolder.imvPhoto.setImageResource(R.drawable.loading);
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.loadImage(cartaActual.getImageURL(), new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
+                }
+
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                }
+
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    cartaActual.setBitmap(loadedImage);
+                    rowHolder.imvPhoto.setImageBitmap(loadedImage);
+                }
+
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
+                }
+            });
+        }
         //rowHolder.imvPhoto.setImageResource(cartaActual.getImageURL());
 
         rowHolder.itemView.setOnClickListener(view -> {
