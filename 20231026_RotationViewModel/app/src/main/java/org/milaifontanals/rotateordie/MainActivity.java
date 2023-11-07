@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
         // Instanciem el ViewModel amb totes les seves dades
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         //viewModel = new MainActivityViewModel();// Facil....però ERRRRRRRRONI !!!!!
-        viewModel.getHoraActual().observe(this,date -> {
+        /*viewModel.getHoraActual().observe(this,date -> {
             SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
             binding.txvTime.setText( sdf.format(date));
-        });
+        });*/
 
         //setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        /*Thread t = new Thread(() -> {
+        Thread t = new Thread(() -> {
             while(true){
                 try {
                     Thread.sleep(1000);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         t.start();
-        */
+
     }
 
 
