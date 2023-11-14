@@ -29,7 +29,7 @@ public class DailyWeather {
                 ", weatherDescription='" + weatherDescription + '\'' +
                 ", weatherImage='" + weatherImage + '\'' +
                 ", date=" + date +
-                '}';
+                "} \n ================================= \n";
     }
 
     public float getTempMax() {

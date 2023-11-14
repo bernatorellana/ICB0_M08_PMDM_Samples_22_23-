@@ -46,7 +46,16 @@ public class WMOCodes {
         WMOCode code = codeMapping.get(codi);
         if(isDay){
             return code.getDescDay();
-        } else
+        } else {
             return code.getDescNight();
+        }
+    }
+    public String getImage(int codi, boolean isDay) {
+        WMOCode code = codeMapping.get(codi);
+        if (isDay) {
+            return code.getImageDay();
+        } else {
+            return code.getImageNight();
+        }
     }
 }
