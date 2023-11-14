@@ -23,7 +23,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivityViewModel extends AndroidViewModel
 {
-    MutableLiveData<List<DailyWeather>> weatherList = new MutableLiveData<>();
+    public MutableLiveData<List<DailyWeather>> getWeatherList() {
+        return weatherList;
+    }
+
+    private MutableLiveData<List<DailyWeather>> weatherList = new MutableLiveData<>();
     public static final String TAG ="WEATHER_APP";
 
     /**
@@ -31,7 +35,7 @@ public class MainActivityViewModel extends AndroidViewModel
      * la MainActivity.
      * @param application
      */
-    MainActivityViewModel( Application application){
+    public MainActivityViewModel( Application application){
         super(application);
 
         Observable.fromCallable( ()-> {
