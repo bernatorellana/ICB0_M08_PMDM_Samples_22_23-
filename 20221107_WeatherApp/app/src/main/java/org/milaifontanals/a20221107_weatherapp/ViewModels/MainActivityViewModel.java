@@ -42,7 +42,9 @@ public class MainActivityViewModel extends AndroidViewModel
 
             List<DailyWeather> wl = OpenWeatherAPI.getForecast7days(getApplication());
             weatherList.postValue(wl);
-            return weatherList;
+                    Log.d(TAG,weatherList.toString() );
+
+                    return weatherList;
           } ).subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe();
