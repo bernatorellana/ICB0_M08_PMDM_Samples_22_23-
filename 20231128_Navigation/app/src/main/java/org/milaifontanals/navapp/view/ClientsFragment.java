@@ -3,6 +3,7 @@ package org.milaifontanals.navapp.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import org.milaifontanals.navapp.R;
 import org.milaifontanals.navapp.databinding.FragmentClientsBinding;
+import org.milaifontanals.navapp.viewmodel.MainViewModel;
 
 /**
  * A simple {@link Fragment} subclass.

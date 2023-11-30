@@ -6,6 +6,7 @@ import static org.milaifontanals.navapp.view.ClientsFragment.ARG_YEAR;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import org.milaifontanals.navapp.R;
 import org.milaifontanals.navapp.databinding.FragmentHomeBinding;
+import org.milaifontanals.navapp.viewmodel.MainViewModel;
 
 
 public class HomeFragment extends Fragment {
@@ -23,7 +25,9 @@ public class HomeFragment extends Fragment {
     // RESPECT !
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
     }
 
     private FragmentHomeBinding binding;
