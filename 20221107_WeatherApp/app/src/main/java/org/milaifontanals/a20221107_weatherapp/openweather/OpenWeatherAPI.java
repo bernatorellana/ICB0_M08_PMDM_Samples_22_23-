@@ -3,6 +3,8 @@ package org.milaifontanals.a20221107_weatherapp.openweather;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.milaifontanals.a20221107_weatherapp.MainActivity;
@@ -18,6 +20,22 @@ import java.util.List;
 public class OpenWeatherAPI {
 
     public static final String TAG ="WEATHER_APP";
+
+    public static CityInfoResults getCityInfo(String city){
+        try {
+            String URL = "https://geocoding-api.open-meteo.com/v1/search?name=" + city + "&count=10&language=en&format=json";
+
+            String json = NetworkUtils.getJSon(URL);
+            Log.d(TAG, "Json descarregat:\n" + json);
+
+            Gson gson = new Gson();
+            return gson.fromJson(json, CityInfoResults.class);
+
+        } catch (Exception e){
+            Log.e(TAG,"Error descarregant CityInfo" , e);
+            return null;
+        }
+    }
 
     public static List<DailyWeather> getForecast7days(Context c){
         List<DailyWeather> weatherList = new ArrayList<>();

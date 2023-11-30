@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapa_navegacio"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="org.milaifontanals.navapp.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_clientsFragment"
+            app:destination="@id/clientsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productesFragment"
+            app:destination="@id/productesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productesFragment"
+        android:name="org.milaifontanals.navapp.view.ProductesFragment"
+        android:label="fragment_productes"
+        tools:layout="@layout/fragment_productes" />
+    <fragment
+        android:id="@+id/clientsFragment"
+        android:name="org.milaifontanals.navapp.view.ClientsFragment"
+        android:label="fragment_clients"
+        tools:layout="@layout/fragment_clients" >
+        <argument
+            android:name="year"
+            app:argType="integer" />
+    </fragment>
+</navigation>

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import org.milaifontanals.a20221107_weatherapp.R;
 import org.milaifontanals.a20221107_weatherapp.model.DailyWeather;
 import org.milaifontanals.a20221107_weatherapp.model.WMOCodes;
+import org.milaifontanals.a20221107_weatherapp.openweather.CityInfoResults;
 import org.milaifontanals.a20221107_weatherapp.openweather.OpenWeatherAPI;
 import org.milaifontanals.a20221107_weatherapp.utils.NetworkUtils;
 
@@ -39,6 +40,9 @@ public class MainActivityViewModel extends AndroidViewModel
         super(application);
 
         Observable.fromCallable( ()-> {
+
+             CityInfoResults r = OpenWeatherAPI.getCityInfo("Igualada");
+             Log.d(TAG,r.toString());
 
             List<DailyWeather> wl = OpenWeatherAPI.getForecast7days(getApplication());
             weatherList.postValue(wl);
