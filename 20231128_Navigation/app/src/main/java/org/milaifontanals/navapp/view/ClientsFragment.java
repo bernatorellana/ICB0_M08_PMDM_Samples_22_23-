@@ -4,12 +4,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.milaifontanals.navapp.R;
 import org.milaifontanals.navapp.databinding.FragmentClientsBinding;
 import org.milaifontanals.navapp.viewmodel.MainViewModel;
 
@@ -21,7 +22,7 @@ import org.milaifontanals.navapp.viewmodel.MainViewModel;
 public class ClientsFragment extends Fragment {
 
     public static final String ARG_YEAR = "year";
-
+    private MainViewModel mViewmodel;
     private int mParamYear;
     public ClientsFragment() {
         // Required empty public constructor
@@ -39,6 +40,8 @@ public class ClientsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mViewmodel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+
         if (getArguments() != null) {
             mParamYear = getArguments().getInt(ARG_YEAR);
         }
@@ -50,8 +53,17 @@ public class ClientsFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentClientsBinding.inflate(getLayoutInflater());
 
-        binding.txvYear.setText("ANY:"+mParamYear);
+        mViewmodel.setYear(mParamYear);
+        mViewmodel.setDesc(mViewmodel.getHoroscopXines().get(mParamYear%12));
+//        binding.txvYear.setText("ANY:"+mParamYear +"\n"+
+//                                "HOROSCOP"+mViewmodel.getHoroscopXines().get(mParamYear%12));
 
+        binding.btnBack.setOnClickListener(view -> {
+            NavController nav = NavHostFragment.findNavController(this);
+            nav.navigateUp();
+        });
+
+        binding.setViewmodel(mViewmodel);
         return binding.getRoot();
     }
 }

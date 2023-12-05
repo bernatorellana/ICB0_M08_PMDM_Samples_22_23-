@@ -1,13 +1,12 @@
 package org.milaifontanals.navapp.view;
 
 
-import static org.milaifontanals.navapp.view.ClientsFragment.ARG_YEAR;
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -21,6 +20,7 @@ import org.milaifontanals.navapp.viewmodel.MainViewModel;
 
 public class HomeFragment extends Fragment {
 
+    MainViewModel mViewmodel;
 
     // RESPECT !
     @Override
@@ -28,6 +28,10 @@ public class HomeFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
 
+        mViewmodel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mViewmodel.getHoroscopXines().put(3, "EL CONEJO: Los que nacen en el Año del Conejo reúnen extraordinarias cualidades humanas: son prudentes, inteligentes, afables, discretos, previsores, atentos y benevolentes. Por eso, el signo del conejo es ampliamente aceptado por la gente.\n" +
+                "\n" +
+                "De carácter moderado e indulgente, amante de la paz y la concordia, el conejo odia la guerra y la violencia. Le gusta la vida tranquila, la ternura y la armonía.");
     }
 
     private FragmentHomeBinding binding;
@@ -40,11 +44,14 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
         binding.btnClients.setOnClickListener(view -> {
 
+           NavDirections n = HomeFragmentDirections.actionHomeFragmentToClientsFragment(1203);
+
            NavController nav = NavHostFragment.findNavController(this);
-           Bundle bundle = new Bundle();
+           nav.navigate(n);
+           /*Bundle bundle = new Bundle();
            bundle.putInt(ARG_YEAR, 2023);
            nav.navigate(R.id.action_homeFragment_to_clientsFragment,
-                   bundle);
+                   bundle);*/
         });
         binding.btnProductes.setOnClickListener(view -> {
             NavController nav = NavHostFragment.findNavController(this);
