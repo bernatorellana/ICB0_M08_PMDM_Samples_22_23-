@@ -7,6 +7,8 @@ import org.milaifontanals.testroombasic.model.User;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM user")
@@ -20,7 +22,7 @@ public interface UserDao {
     User findByName(String first, String last);
 
     @Insert
-    void insertAll(User... users);
+    public void insertAll(User... users);
 
     @Update
     void update(User u);
