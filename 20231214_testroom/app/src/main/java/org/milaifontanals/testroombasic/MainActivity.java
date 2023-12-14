@@ -1,44 +1,45 @@
 package org.milaifontanals.testroombasic;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.viewmodel.ViewModelFactoryDsl;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
 import android.util.Log;
 
+import org.milaifontanals.testroombasic.adapters.UsersAdapter;
 import org.milaifontanals.testroombasic.dao.UserDao;
 import org.milaifontanals.testroombasic.db.AppDatabase;
 import org.milaifontanals.testroombasic.model.User;
+import org.milaifontanals.testroombasic.viewmodel.UserViewModel;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private UserViewModel viewModel;
+    private UsersAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        RecyclerView rcyUsers = findViewById(R.id.rcyUsers);
+        rcyUsers.setLayoutManager(new LinearLayoutManager(this));
+
         //**************************************************
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "db_persones.db").
-                allowMainThreadQueries().build();
-        // ATENCIÓ: allowMainThreadQueries() ÉS UNA XAPU, i només
-        //           es fa servir per proposits demostratius !
-
-
-
-        UserDao userDao = db.userDao();
-        /*User u1 = new User(12,"Pep", "González");
-        User u2 = new User(5,"Cristina", "Pérez");
-        userDao.insertAll(u1,u2);*/
-
-        List<User> usuaris = userDao.getAll();
-        for(User u:usuaris){
-            Log.d("XXX", u.toString());
-            u.firstName = "Mr."+u.firstName;
-            userDao.update(u);
-        }
-
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        LiveData<List<User>> users =  viewModel.getUsers();
+        users.observe(this,elsUsuaris -> {
+                Log.d("XXX", "usuaris:"+elsUsuaris);
+                adapter = new UsersAdapter(elsUsuaris, this);
+                rcyUsers.setAdapter(adapter);
+            }
+        );
     }
 }

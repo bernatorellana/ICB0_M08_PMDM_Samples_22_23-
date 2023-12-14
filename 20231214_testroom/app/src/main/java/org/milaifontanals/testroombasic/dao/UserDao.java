@@ -1,5 +1,6 @@
 package org.milaifontanals.testroombasic.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.*;
 
 import org.milaifontanals.testroombasic.model.User;
@@ -9,7 +10,7 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM user")
-    List<User> getAll();
+    LiveData<List<User>> getAll();
 
     @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
